@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.text import slugify # removes strings or alphanumerics or spaces from text
 import misaka
 from django.contrib.auth import get_user_model
-from django.shortcuts import reverse
+from django.urls import reverse
 # Create your models here.
 User = get_user_model() # returns the current user model active on this project
 from django import template
@@ -22,7 +22,6 @@ class Group(models.Model):
         self.slug = slugify(self.name)
         self.description_html = misaka.html(self.description)
         super().save(*args,**kwargs)
-
     def get_absolute_url(self):
         return reverse('groups:single', kwargs={'slug': self.slug})
     
